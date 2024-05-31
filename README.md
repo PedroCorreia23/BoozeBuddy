@@ -1,79 +1,113 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# BoozeBuddy
 
-# Getting Started
+# BoozeBuddy Mobile App
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+This is a React Native mobile application that allows users to search for drink recipes by entering the name of a drink or an ingredient. The app provides a list of drinks and their recipes based on the user's input.
 
-## Step 1: Start the Metro Server
+## Table of Contents
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the App](#running-the-app)
+- [Project Structure](#project-structure)
+- [API Integration](#api-integration)
+- [Contributing](#contributing)
+- [License](#license)
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Features
 
-```bash
-# using npm
-npm start
+- Search for drink recipes by name or ingredient
+- Display a list of drinks with their recipes
+- Minimalist and user-friendly interface
 
-# OR using Yarn
-yarn start
-```
+## Prerequisites
 
-## Step 2: Start your Application
+- Node.js (14.x or newer)
+- npm (6.x or newer)
+- Java Development Kit (JDK) (version 11 or newer)
+- Android Studio
+- Visual Studio Code (recommended for development)
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Installation
 
-### For Android
+1. **Clone the Repository:**
 
-```bash
-# using npm
-npm run android
+    ```sh
+    git clone https://github.com/yourusername/drink-recipe-app.git
+    cd drink-recipe-app
+    ```
 
-# OR using Yarn
-yarn android
-```
+2. **Install Dependencies:**
 
-### For iOS
+    ```sh
+    npm install
+    ```
 
-```bash
-# using npm
-npm run ios
+3. **Set Up Android Environment:**
 
-# OR using Yarn
-yarn ios
-```
+    - Download and install [Android Studio](https://developer.android.com/studio).
+    - Ensure the following components are installed:
+        - Android SDK
+        - Android SDK Platform
+        - Android Virtual Device (AVD)
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+4. **Configure Environment Variables:**
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+    Add the following lines to your shell configuration file (e.g., `~/.bash_profile` or `~/.zshrc`):
 
-## Step 3: Modifying your App
+    ```sh
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+    ```
 
-Now that you have successfully run the app, let's modify it.
+    Apply the changes by running:
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+    ```sh
+    source ~/.bash_profile  # or source ~/.zshrc
+    ```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Running the App
 
-## Congratulations! :tada:
+1. **Start the Metro Bundler:**
 
-You've successfully run and modified your React Native App. :partying_face:
+    ```sh
+    npx react-native start
+    ```
 
-### Now what?
+2. **Run the App on an Android Emulator:**
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+    In a new terminal window, run:
 
-# Troubleshooting
+    ```sh
+    npx react-native run-android
+    ```
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Project Structure
 
-# Learn More
+    .
+    ├── android                 # Android native code
+    ├── ios                     # iOS native code
+    ├── src                     # Source files
+    │   ├── components          # React components
+    │   │   ├── SearchBar.js
+    │   │   ├── ResultsList.js
+    │   ├── App.js              # Main App component
+    ├── .gitignore
+    ├── app.json
+    ├── babel.config.js
+    ├── index.js
+    ├── package.json
+    ├── README.md
 
-To learn more about React Native, take a look at the following resources:
+## API Integration
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+The app uses a backend API to fetch drink recipes. Ensure that the backend is running and accessible at `http://localhost:3000`.
+
+### Example API Request
+
+To fetch drink recipes by name:
+
+```sh
+GET http://localhost:3000/drinks?name=negroni
