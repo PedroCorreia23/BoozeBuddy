@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors()); // This allows all CORS requests
+app.use(cors()); // Allow all origins
 app.use(express.json());
 
 // PostgreSQL Pool setup
@@ -26,8 +26,10 @@ app.get('/drinks', async (req, res) => {
   try {
     let result;
     if (name) {
+      console.log('Querying drinks by name:', name);
       result = await pool.query('SELECT * FROM drinks WHERE name ILIKE $1', [`%${name}%`]);
     } else if (ingredient) {
+      console.log('Querying drinks by ingredient:', ingredient);
       result = await pool.query(`
         SELECT d.* FROM drinks d
         JOIN drink_ingredients di ON d.id = di.drink_id
@@ -38,7 +40,7 @@ app.get('/drinks', async (req, res) => {
 
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
+    console.error('Error fetching drinks:', err); // Log detailed error
     res.status(500).send('Server Error');
   }
 });
@@ -48,7 +50,7 @@ app.get('/drinks/:id', async (req, res) => {
     const result = await pool.query('SELECT * FROM drinks WHERE id = $1', [req.params.id]);
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error('Error fetching drink by ID:', err); // Log detailed error
     res.status(500).send('Server Error');
   }
 });

@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   const searchDrinks = async (query: string) => {
     try {
-      const response = await axios.get(`http://192.168.1.10:3000/drinks?name=${query}`);
+      const response = await axios.get(`http://192.168.1.88:3000/drinks?name=${query}`);
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching drinks:', error); // Log the full error
